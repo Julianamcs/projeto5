@@ -1,4 +1,4 @@
-package com.posuftpr.projeto5;
+package config;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,9 +28,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * 
  */
 @Configuration
-@EnableJpaRepositories("com.posuftpr.projeto5")
+@EnableJpaRepositories("repository")
 @EnableTransactionManagement
 public class SpringDataConfig {
+    
     
     /**este método configura as informações básicas de 
      * uma conexão com um banco de dado
@@ -40,11 +41,10 @@ public class SpringDataConfig {
     public DataSource dataSource() {
 
         BoneCPDataSource ds = new BoneCPDataSource(); 
-
         ds.setUser("root");
         ds.setPassword("admin");
         ds.setJdbcUrl("jdbc:mysql://localhost:3306/posbd");
-        ds.setDriverClass("com.mysql.jdbc.Driver");
+        ds.setDriverClass("com.mysql.jdbc.driver");
         return ds;  
     }
 
@@ -63,18 +63,18 @@ public class SpringDataConfig {
             new HibernateJpaVendorAdapter(); 
         /**setGenerateDdl é configurado como false, significa que o esquema do banco de dados 
          * não será gerado pelo Hibernate, Altere para true se existir essa necessidade**/
-        vendorAdapter.setGenerateDdl(true); 
+        vendorAdapter.setGenerateDdl(false); 
         /**setShowSql Escreve no log as instruções SQL geradas pelo Hibernate. Caso seja false, 
-         * essas instruções são omitidas do log**/
+         * essas instruções são omitidas do log (false)**/
         vendorAdapter.setShowSql(true);
 
-        factory.setDataSource(dataSource()); 
+        factory.setDataSource(this.dataSource()); 
         factory.setJpaVendorAdapter(vendorAdapter);
         /**setPackagesToScan(), recebe como parâmetro o pacote da aplicação que contém os 
          * mapeamentos do tipo objeto-relacional. Essa informação é essencial para o Hibernate 
          * junto a JPA saber onde se encontram os mapeamentos entre as classes de entidades e 
          * as tabelas do banco de dados**/
-        factory.setPackagesToScan("com.posuftpr.projeto5.entity");
+        factory.setPackagesToScan("entity");
         /**o método afterPropertiesSet() , acessado a par tir da variável factory  a ser analisado. 
          * Este método é necessário para que o EntityManagerFactory só seja criado após todas as 
          * configurações terem sido carregadas**/
@@ -100,7 +100,6 @@ public class SpringDataConfig {
          * banco de dados que ele está lidando. A instancia da classe HibernateJpaDialect identifica 
          * automaticamente este dialeto a partir do banco de dados configurado.**/
         manager.setJpaDialect(new HibernateJpaDialect());
-   
         return manager;
     }
     

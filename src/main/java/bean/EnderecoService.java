@@ -33,15 +33,11 @@ public class EnderecoService {
       repository.save(endereco);
    }
 
-   public Optional<Endereco> buscaPorId(Long id) {
-      return repository.findById(id);
-   }
-
    public List<Endereco> buscarTodos() {
       return repository.findAll();
    }
 
-   public Page<Endereco> paginaRresultados() {
+   public Page<Endereco> paginaResultados() {
    Sort sort = new Sort(Direction.ASC, "logradouro");
        Pageable pageable = new PageRequest(0,5,sort);
    return repository.findAll(pageable);

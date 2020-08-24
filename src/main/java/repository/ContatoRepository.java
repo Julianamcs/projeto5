@@ -9,8 +9,8 @@ import entity.Contato;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 
 /**
@@ -18,26 +18,11 @@ import org.springframework.data.jpa.repository.Query;
  * @author JulianaMCS
  */
 public interface ContatoRepository extends JpaRepository<Contato, Long> {
+     
+   Optional<Contato> buscaPorId(Long id);
 
-    void salvar(Contato contato);
+   List<Contato>buscarTodosPorIdadeAsc(Sort sort);
 
-    Optional<Contato> buscaPorId(Long id);
-
-    List<Contato> buscarTodos();
-
-    List<Contato>buscarTodosPorIdadeAsc();
-
-    Page<Contato> paginaRresultados();
-    
-   @Query(name = "Contato.byIdade")
-   List<Contato> findByIdade(Integer idade);
+   Page<Contato> paginaResultados();
    
-   @Query(name = "Contato.byNome") 
-   Contato findByNome(String nome);
-   
-   SemEndereco findContatoByNome(String nome);
-   
-   NomeCidade findContatoCidadeByNome(String nome);
-
-    
 }

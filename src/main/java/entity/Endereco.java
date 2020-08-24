@@ -1,7 +1,6 @@
 package entity;
 
 
-
 import javax.persistence.*;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -20,7 +19,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "ENDERECOS")
 public class Endereco extends AbstractPersistable<Long> {
        
-    public enum TipoEndereco{
+    public enum TipoEndereco {
             RESIDENCIAL,  COMERCIAL
     }
 

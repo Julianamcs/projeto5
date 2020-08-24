@@ -19,7 +19,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 
 
-
 /**
  *
  * @author JulianaMCS
@@ -34,20 +33,20 @@ public class ContatoService {
       repository.save(contato);
    }
 
+   public List<Contato> buscarTodos() {
+      return repository.findAll();
+   }
+   
    public Optional<Contato> buscaPorId(Long id) {
       return repository.findById(id);
    }
 
-   public List<Contato> buscarTodos() {
-      return repository.findAll();
-   }
-
-   public List<Contato>buscarTodosPorIdadeAsc(){
-      Sort sort = new Sort(Direction.ASC, "idade");
+   public List<Contato>buscarTodosPorIdadeAsc(Sort sort){
+      sort = new Sort(Direction.ASC, "idade");
       return repository.findAll(sort);
    }
 
-   public Page<Contato> paginaRresultados() {
+   public Page<Contato> paginaResultados() {
    Sort sort = new Sort(Direction.ASC, "nome");
        Pageable pageable = new PageRequest(0,8,sort);
    return repository.findAll(pageable);

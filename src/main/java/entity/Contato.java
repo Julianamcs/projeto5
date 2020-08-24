@@ -18,14 +18,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name="CONTATOS")
-@NamedQuery(
-   name = "Contato.byIdade",
-   query = "from Contato c where c.idade = ?1")
-@NamedNativeQuery(
-   name = "Contato.byNome",
-   query = "select * from Contatos where nome like ?1",
-   resultClass = Contato.class)
-public class Contato extends AbstractPersistable<Long> implements Serializable {
+/**@EntityListeners(AuditingEntityListener.class)*/
+public class Contato extends AbstractPersistable<Long> {
     
    @Column(name = "nome", length = 64, nullable = false)
    private String nome;
@@ -41,14 +35,11 @@ public class Contato extends AbstractPersistable<Long> implements Serializable {
    @JoinColumn(name = "endereco_id", nullable = false) 
    private Endereco endereco;
    
-    /**
-     *
-     * @param id
-     */
+    
     @Override
-   public void setId(Long id) {
+    public void setId(Long id) {
       super.setId(id);
-   }
+    }
 
     /**
      * @return the nome
