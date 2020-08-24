@@ -48,8 +48,8 @@ public class SpringDataConfig {
         return ds;  
     }
 
-    /**configurar os recursos necessários par o Spring Data lidar com o JP
-     * @return A**/
+    /**configurar os recursos necessários par o Spring Data lidar com o JPA
+     * @return **/
     
     @Bean
     public EntityManagerFactory entityManagerFactory() {
@@ -74,7 +74,7 @@ public class SpringDataConfig {
          * mapeamentos do tipo objeto-relacional. Essa informação é essencial para o Hibernate 
          * junto a JPA saber onde se encontram os mapeamentos entre as classes de entidades e 
          * as tabelas do banco de dados**/
-        factory.setPackagesToScan("com.curso.entity");
+        factory.setPackagesToScan("com.posuftpr.projeto5.entity");
         /**o método afterPropertiesSet() , acessado a par tir da variável factory  a ser analisado. 
          * Este método é necessário para que o EntityManagerFactory só seja criado após todas as 
          * configurações terem sido carregadas**/

@@ -18,6 +18,13 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name="CONTATOS")
+@NamedQuery(
+   name = "Contato.byIdade",
+   query = "from Contato c where c.idade = ?1")
+@NamedNativeQuery(
+   name = "Contato.byNome",
+   query = "select * from Contatos where nome like ?1",
+   resultClass = Contato.class)
 public class Contato extends AbstractPersistable<Long> implements Serializable {
     
    @Column(name = "nome", length = 64, nullable = false)

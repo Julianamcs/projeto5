@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 
 /**
@@ -28,6 +29,15 @@ public interface ContatoRepository extends JpaRepository<Contato, Long> {
 
     Page<Contato> paginaRresultados();
     
-    List<Contato> findByEnderecoCidade(String cidade);
+   @Query(name = "Contato.byIdade")
+   List<Contato> findByIdade(Integer idade);
+   
+   @Query(name = "Contato.byNome") 
+   Contato findByNome(String nome);
+   
+   SemEndereco findContatoByNome(String nome);
+   
+   NomeCidade findContatoCidadeByNome(String nome);
+
     
 }

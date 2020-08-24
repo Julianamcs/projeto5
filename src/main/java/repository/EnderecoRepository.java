@@ -10,6 +10,7 @@ import entity.Endereco;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -24,6 +25,12 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
     List<Endereco> buscarTodos() ;
 
     Page<Endereco> paginaRresultados() ;
+    
+    @Query("select e.cidade as cidade count(e.cidade) as total"
+    + " from Enderece e"
+    + " group by e.cidade")
+    List<CidadeTotal> findByCidadeTotal();
+
     
     
 }
