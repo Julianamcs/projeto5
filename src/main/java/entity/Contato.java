@@ -9,7 +9,12 @@ package entity;
 import java.io.Serializable;
 import java.util.Date; 
 import javax.persistence.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 
 /**
@@ -18,7 +23,14 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name="CONTATOS")
-/**@EntityListeners(AuditingEntityListener.class)*/
+@NamedQuery(
+   name = "Contato.byIdade",
+   query = "from Contato c where c.idade = ?1")
+@NamedNativeQuery(
+   name = "Contato.byNome",
+   query = "select * from Contatos where nome like ?1",
+   resultClass = Contato.class)
+@EntityListeners(AuditingEntityListener.class)
 public class Contato extends AbstractPersistable<Long> {
     
    @Column(name = "nome", length = 64, nullable = false)
@@ -35,12 +47,29 @@ public class Contato extends AbstractPersistable<Long> {
    @JoinColumn(name = "endereco_id", nullable = false) 
    private Endereco endereco;
    
-    
     @Override
     public void setId(Long id) {
       super.setId(id);
     }
 
+   @Column(name = "created_by")
+   @CreatedBy
+   private String createdBy;
+   
+   @Column(name = "created_date") 
+   @CreatedDate
+   @Temporal(javax.persistence.TemporalType.DATE)
+   private Date createdDate;
+   
+   @Column(name = "modified_by") 
+   @LastModifiedBy
+   private String modifiedBy;
+   
+   @Column(name = "modified_date")
+   @LastModifiedDate
+   @Temporal(javax.persistence.TemporalType.DATE)
+   private Date modifiedDate;
+    
     /**
      * @return the nome
      */

@@ -7,6 +7,7 @@ package config;
  */
 
 
+
 import com.jolbox.bonecp.BoneCPDataSource;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -27,8 +28,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author JulianaMCS
  * 
  */
-@Configuration
-@EnableJpaRepositories("repository")
+@Configuration 
+@EnableJpaRepositories("repository") 
 @EnableTransactionManagement
 public class SpringDataConfig {
     
@@ -44,7 +45,7 @@ public class SpringDataConfig {
         ds.setUser("root");
         ds.setPassword("admin");
         ds.setJdbcUrl("jdbc:mysql://localhost:3306/posbd");
-        ds.setDriverClass("com.mysql.jdbc.driver");
+        ds.setDriverClass("com.mysql.jdbc.Driver");
         return ds;  
     }
 
@@ -54,33 +55,19 @@ public class SpringDataConfig {
     @Bean
     public EntityManagerFactory entityManagerFactory() {
    
-        /**a instrução para vincular o DataSource com a EntityManagerFactory**/
-        LocalContainerEntityManagerFactoryBean factory =
-            new LocalContainerEntityManagerFactoryBean();
-        /**é informado o provedor que vai ser aplicado a este recurso via método 
-         * setJpaVendorAdapter()**/
+       LocalContainerEntityManagerFactoryBean factory =
+      new LocalContainerEntityManagerFactoryBean();
+
         HibernateJpaVendorAdapter vendorAdapter = 
-            new HibernateJpaVendorAdapter(); 
-        /**setGenerateDdl é configurado como false, significa que o esquema do banco de dados 
-         * não será gerado pelo Hibernate, Altere para true se existir essa necessidade**/
+      new HibernateJpaVendorAdapter(); 
         vendorAdapter.setGenerateDdl(false); 
-        /**setShowSql Escreve no log as instruções SQL geradas pelo Hibernate. Caso seja false, 
-         * essas instruções são omitidas do log (false)**/
         vendorAdapter.setShowSql(true);
 
-        factory.setDataSource(this.dataSource()); 
+        factory.setDataSource(dataSource()); 
         factory.setJpaVendorAdapter(vendorAdapter);
-        /**setPackagesToScan(), recebe como parâmetro o pacote da aplicação que contém os 
-         * mapeamentos do tipo objeto-relacional. Essa informação é essencial para o Hibernate 
-         * junto a JPA saber onde se encontram os mapeamentos entre as classes de entidades e 
-         * as tabelas do banco de dados**/
         factory.setPackagesToScan("entity");
-        /**o método afterPropertiesSet() , acessado a par tir da variável factory  a ser analisado. 
-         * Este método é necessário para que o EntityManagerFactory só seja criado após todas as 
-         * configurações terem sido carregadas**/
         factory.afterPropertiesSet();
-        /**E por fim, o objeto factory retorna um objeto do tipo javax.persistence.EntityManagerFactory 
-         * via método getObject().**/
+
         return factory.getObject();
     }
 
@@ -88,18 +75,12 @@ public class SpringDataConfig {
      *
      * @return
      */
-    @Bean
+    @Bean(name="transactionManager")
     public PlatformTransactionManager transactioManager() {
-
-        /**é necessário informar o que será gerenciado, ou seja, o objeto que vai lidar com as interações 
-         * no banco de dados. Este objeto é o retorno do recurso criado no método entityManagerFactory(), 
-         * o qual deve ser adicionado com o parâmetro de setEntityManagerFactory() da variável manager.**/
         JpaTransactionManager manager = new JpaTransactionManager(); 
         manager.setEntityManagerFactory(entityManagerFactory()); 
-        /**o setJpaDialect() , acessível via manager, indica ao controle transacional qual o dialeto do 
-         * banco de dados que ele está lidando. A instancia da classe HibernateJpaDialect identifica 
-         * automaticamente este dialeto a partir do banco de dados configurado.**/
         manager.setJpaDialect(new HibernateJpaDialect());
+   
         return manager;
     }
     

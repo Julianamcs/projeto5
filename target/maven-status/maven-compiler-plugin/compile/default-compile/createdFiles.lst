@@ -1,0 +1,12 @@
+config\SpringDataConfig.class
+Main.class
+repository\ContatoRepository.class
+projection\NomeCidade.class
+repository\EnderecoRepository.class
+bean\EnderecoService.class
+entity\Endereco$TipoEndereco.class
+projection\SemEndereco.class
+bean\ContatoService.class
+entity\Endereco.class
+projection\CidadeTotal.class
+entity\Contato.class

@@ -3,5 +3,9 @@ C:\Users\JulianaMCS\Documents\NetBeansProjects\Projeto5\src\main\java\config\Spr
 C:\Users\JulianaMCS\Documents\NetBeansProjects\Projeto5\src\main\java\repository\ContatoRepository.java
 C:\Users\JulianaMCS\Documents\NetBeansProjects\Projeto5\src\main\java\bean\ContatoService.java
 C:\Users\JulianaMCS\Documents\NetBeansProjects\Projeto5\src\main\java\entity\Endereco.java
+C:\Users\JulianaMCS\Documents\NetBeansProjects\Projeto5\src\main\java\projection\SemEndereco.java
 C:\Users\JulianaMCS\Documents\NetBeansProjects\Projeto5\src\main\java\repository\EnderecoRepository.java
+C:\Users\JulianaMCS\Documents\NetBeansProjects\Projeto5\src\main\java\projection\NomeCidade.java
+C:\Users\JulianaMCS\Documents\NetBeansProjects\Projeto5\src\main\java\projection\CidadeTotal.java
 C:\Users\JulianaMCS\Documents\NetBeansProjects\Projeto5\src\main\java\entity\Contato.java
+C:\Users\JulianaMCS\Documents\NetBeansProjects\Projeto5\src\main\java\Main.java
